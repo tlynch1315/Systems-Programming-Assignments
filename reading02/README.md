@@ -9,7 +9,7 @@ Reading 02
 
 4) #!/bin/sh is a symbolic link to a sh, so all of the commands in the script are executed as if run through sh, just like if it was #!/bin/bash all of the commands would be executed as if through bash
 
-5) The script outputs a list of all of the files in the directory, each file followed by "exists!"
+5) The script outputs a list of all of the first file in the directory followed by "exists!"
 
 6) $1 is the first additional parameter the script was called with
 
