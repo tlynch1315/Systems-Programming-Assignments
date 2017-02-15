@@ -1,0 +1,166 @@
+\documentclass[letterpaper]{article}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+% Title -----------------------------------------------------------------------
+
+\title{Reading 04: Diversity At Notre Dame}
+\date{}
+\author{Tommy Lynch {\textless}tlynch2@nd.edu{\textgreater}}
+
+\maketitle
+
+% Overview --------------------------------------------------------------------
+
+\section*{Overview}
+
+\paragraph{}
+
+For this assignment, I parsed the a file of the demographics in order to create a
+plot of the number of students of each gender per year in the CSE department and a 
+plot of the number of students of each ethnicity per year in the CSE department. 
+I discovered that the number of males dominates the number of females, but that
+gap is slowly closing.  Also, the number of white people in our major dominates
+the other ethnicities, but that gap does not seem to be closing.
+
+% Methodology -----------------------------------------------------------------
+
+\section*{Methodology}
+
+\paragraph{}
+
+The method I used to extract the data was to determine the column based on the 
+year using a modulo expression along with a simple subtraction expression, determine
+the requested gender or ethnicity just by using the second parameter when calling
+the count\_gender or count\_ethnic function.  In the function, I curled the given URL 
+to get the {\tt demographics.csv} file and then redirected the error into /dev/null 
+so the output would be clean and piped that into  while read LINE that used 
+cut -d `,' -f ``\$column" piped to grep ``\$gender" to get all of the instances of the 
+requested gender or ethnicity in a given year and then piped the while loop to 
+wc -w to count the words. Once I had the scripts, there was no problem creating the 
+graphs because of the given Makefile.
+% Analysis --------------------------------------------------------------------
+
+\section*{Analysis}
+
+This table \ref{table:1} is the result of running ./gender.sh
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{||c c c||}
+ \hline
+ Year & Female & Male \\ [0.5ex]
+ \hline\hline
+ 2013 & 14 & 49 \\
+ 2014 & 12 & 44 \\
+ 2015 & 16 & 58 \\
+ 2016 & 19 & 60 \\
+ 2017 & 26 & 65 \\
+ 2018 & 36 & 90 \\
+ 2019 & 51 & 97 \\ [1ex]
+ \hline
+\end{tabular}
+\caption{Table for gender distribution of CSE students}
+\label{table:gender}
+\end{table}
+
+This table \ref{table:2} is the result of running ./ethnic.sh
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{||c c c c c c c c||}
+ \hline
+ Year & Caucasian & Asian & Hispanic & African American & Native American & Multiple Selection & Undeclared \\ [0.5ex]
+ \hline\hline
+ 2013 & 43 & 7 & 7 & 3 & 1 & 2 & 0 \\
+ 2014 & 43 & 5 & 4 & 2 & 1 & 1 & 0 \\
+ 2015 & 47 & 9 & 10 & 4 & 1 & 1 & 2 \\
+ 2016 & 53 & 9 & 9 & 1 & 7 & 0 & 0 \\
+ 2017 & 60 & 12 & 3 & 5 & 5 & 6 & 0 \\
+ 2018 & 91 & 8 & 12 & 3 & 4 & 8 & 0 \\
+ 2019 & 92 & 13 & 10 & 3 & 15 & 14 & 0 \\ [1ex]
+ \hline
+\end{tabular}
+\caption{Table for ethnicity distribution of CSE students}
+\label{table:ethnic}
+\end{table}
+
+
+\paragraph{}
+
+Graph of the gender distribution: 
+
+\includegraphics[scale=0.5]{gender.png}
+
+Graph of the ethnicity distribution:
+\includegraphics[scale=0.5]{ethnic.png}
+
+
+\begin{enumerate}
+
+\item{}What is the overall trend in gender balance in the Computer Science and
+    Engineering program at the University of Notre Dame?
+
+The males dominate.
+
+\item{}How has ethnic diversity changed over time in the Computer Science and
+    Engineering program at the University of Notre Dame?
+
+The amount of students overall has increased, but the Caucasian race still seems
+to dominate the program
+
+\end{enumerate}
+
+% TODO: INSERT FIGURE
+
+You should accompany these tables and graphs with some commentary on the
+meaning of the data and plots.
+
+\paragraph{}
+
+% Discussion ------------------------------------------------------------------
+
+\section*{Discussion}
+
+\paragraph{}
+
+% TODO: REMOVE and EDIT
+This final section is an opportunity for you to reflect on the issue of
+creating a {\bf welcoming} and {\bf supportive} learning environment at the
+University of Notre Dame. For instance, you may wish to discuss any of the
+following questions:
+
+\begin{enumerate}
+
+\item{}Are the issues of gender and ethnic diversity important to you? Should
+    the department work to increase diversity? Should the technology industry
+    	try to improve workplace diversity? Why or why not?
+
+I think that the department should leave it be because you do not want people in 
+this program that are not fully invested in the program just to increase diversity, 
+you should want people that are interested in the subject, no matter what their 
+background is.  That also goes for the tech industry.
+
+\item{}Does the Computer Science and Engineering department provide a welcoming
+    and supportive learning environment to all students? In what ways can it
+    	improve?
+
+I think that it is a very welcoming community, I honestly do not know how to improve 
+the learning environment because I think that it is great as is.
+
+\item{}What challenges have you experienced thus far in the Computer Science
+    and Engineering program? How could the department or university better
+    	support you?
+
+I think that one of the worst problems for the department is the FYS program.  If it 
+were not for this program, we could have started CSE classes in our first year like 
+most other schools and we would not have to play catch up for the rest of our college 
+career.
+
+\end{enumerate}
+
+\end{document}
