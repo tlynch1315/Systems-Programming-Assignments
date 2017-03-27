@@ -4,12 +4,12 @@ ACTIVITY ONE
 ==============
 1.1) 4 bytes
 1.2) 20 bytes
-1.3) 8 bytes
+1.3) 13 bytes
 1.4) 16 bytes
-1.5) 8 bytes
-1.6) 8 bytes
-1.7) 8 bytes
-1.8) 8 bytes
+1.5) 9 bytes
+1.6) 24 bytes
+1.7) 168 bytes
+1.8) 248bytes
 
 ACTIVITY TWO
 ===============
