@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 
 	/* Connect to host */
 	if (connect(client_fd, p->ai_addr, p->ai_addrlen) < 0) {
-	    perror("Unable to connect to : ");
+	    perror("Unable to connect");
 	    close(client_fd);
 	    client_fd = -1;
 	    continue;
