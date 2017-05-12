@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
         //return EXIT_FAILURE;
     //}
     //char * message = "PUT tlynch";
-
+    // the port was found using the port scanner, then hard coded
     FILE * client_fd = socket_dial(HOST, "9776");
     if(client_fd != NULL){
         printf("9776 is open\n");
@@ -92,33 +92,32 @@ int main(int argc, char *argv[]) {
         sprintf(buffer, "%d", port);
         //FILE *s;
         s =  socket_dial(HOST, buffer); // socket_dial takes a char*, not an int, for 2nd arg*/
-        if (client_fd != NULL) {
-            FILE *temp;
-            unsigned long filesize;
-            char buff[BUFSIZ];
-            temp = fopen("final.c", "rb");
-            if(temp == NULL){
-                printf("File not found\n");
-                return 1;
-            }
-            else{
-                fseek(temp, 0, SEEK_END);
-                filesize = ftell(temp);
-                rewind(temp);
-                char buffer[BUFSIZ];
-                sprintf(buffer, "PUT tlynch2 %ld\n", filesize);
-                fputs(buffer, client_fd);
-            }
-            while(!feof(temp)){
-                fputs(buff, client_fd);
-            }                
-            //send(s, PUT tlynch2 3030);
-    
-            fclose(temp);
-            fclose(client_fd);
-            return EXIT_SUCCESS;
+    if (client_fd != NULL) {
+        FILE *temp;
+        unsigned long filesize;
+        char buff[BUFSIZ];
+        temp = fopen("final.c", "rb");
+        if(temp == NULL){
+            printf("File not found\n");
+            return 1;
         }
-        return EXIT_FAILURE;
+        else{
+            fseek(temp, 0, SEEK_END);
+            filesize = ftell(temp);
+            rewind(temp);
+            char buffer[BUFSIZ];
+            sprintf(buffer, "PUT tlynch2 %ld\n", filesize);
+            fputs(buffer, client_fd);
+        }
+        while(!feof(temp)){
+            fputs(buff, client_fd);
+        }                
+    
+        fclose(temp);
+        fclose(client_fd);
+        return EXIT_SUCCESS;
+    }
+    return EXIT_FAILURE;
 
 }
 
@@ -130,6 +129,19 @@ int main(int argc, char *argv[]) {
         fgets(buffer, BUFSIZ, client_fd);
         fputs(buffer, stdout);
     }*/
+
+
+/* OPTIONAL QUESTIONS */
+
+/* If I were a unix util I would be sleep.exe because I need to sleep more
+ *
+ * My favorite part about this class was the guru points because it made my grade go up so much 
+ *
+ * My least favorite part about this class(only thing I did not like pretty much) was this final
+ *
+ */
+
+
 
 
 /* vim: set expandtab sts=4 sw=4 ts=8 ft=c: */
