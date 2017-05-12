@@ -93,28 +93,28 @@ int main(int argc, char *argv[]) {
         //FILE *s;
         s =  socket_dial(HOST, buffer); // socket_dial takes a char*, not an int, for 2nd arg*/
         if (client_fd != NULL) {
-            FILE *pf;
-            unsigned long fsize;
+            FILE *temp;
+            unsigned long filesize;
             char buff[BUFSIZ];
-            pf = fopen("final.c", "rb");
-            if(pf == NULL){
+            temp = fopen("final.c", "rb");
+            if(temp == NULL){
                 printf("File not found\n");
                 return 1;
             }
             else{
-                fseek(pf, 0, SEEK_END);
-                fsize = ftell(pf);
-                rewind(pf);
+                fseek(temp, 0, SEEK_END);
+                filesize = ftell(temp);
+                rewind(temp);
                 char buffer[BUFSIZ];
-                sprintf(buffer, "PUT tlynch2 %ld\n", fsize);
+                sprintf(buffer, "PUT tlynch2 %ld\n", filesize);
                 fputs(buffer, client_fd);
             }
-            while(!feof(pf)){
+            while(!feof(temp)){
                 fputs(buff, client_fd);
             }                
             //send(s, PUT tlynch2 3030);
     
-            fclose(pf);
+            fclose(temp);
             fclose(client_fd);
             return EXIT_SUCCESS;
         }
