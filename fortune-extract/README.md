@@ -1,73 +1,113 @@
-Homework 01
+Homework 02
 ===========
+
 ACTIVITY ONE
 ==============
+1) In extract.sh, I tested to see if there was a parameter after the command using [ -z "$1" ] and if this is true then a usage message is displayed and the script exits
 
-1
-====
-a) The following users, followed by their specific rights,  have normal rights to all of the three directories: tlynch2 rlidwka and system:administrators rlidwka. In my home directory, nd_campus l and system:authuser l have normal rights, but do not have normal rights in my Public or Private directories.  In my Public directory nd_campus rlk and system:authuser rlk have normal rights but do not have normal rights in my Home or Private directories.
-b) the ACL that makes Private private is tlynch2 since I am the only one other than the administrators that can do anything to this directory. the ACLs that makes my Public directory public are nd_campus and system:authuser because this means that anyone on campus can see my directory and any authorized user can see it.
+2) I determined which command to use by reading the book and looking up how to extract files given a certain type of compressed file
 
-2
-====
-a) I was not able to create the file, I recieved a message telling me that permission was denied.
-b) based on this result, the ACLs take precedence over Unix permissions because I was denied permission to this directory.
+3) The most difficult part of writing this script was figuring out what flags to use with tar and I overcame it by reading tar man and using the internet to find out which flags to use for which types of files
 
 ACTIVITY TWO
 ==============
+1) I created a function called get_message() that shuffled messages and piped the first saying into cowsay
 
-| command               | elapsed time |
-|--------------------------------------|
-|cp ...                 | 1.676s       |
-|mv ...                 | 0.003s       |
-|mv ...                 | 1.496s       |
-|rm ...                 | 0.009s       |
+2) I used a trap with the early_exit function to display a message
 
-1
-====
-renaming is faster because it kept all of the files in the same directory, while when it was moved the files had to be put into memory and then put into a separate directory and then deleted from the original directory, which takes longer than just keeping the files in the same directory.
+3) i used read -p with a variable to get the input from a user
 
-2
-====
-the remove operation does not have to put the contents of what its deleting into memory, so it is much faster than moving, which requires memory usage
+4) figuring out how to get the "Question? " to appear if nothing was entered.  I had to put quotes around the variable "$INPUT_STRING"
 
 ACTIVITY THREE
 ================
+1) first step: locate oracle by scanning `xavier.h4x0r.space` for a HTTP port
+    command
+      nmap -PN -p9000-9999 xavier.h4x04.space
+    output:
 
-1) bc < math.txt
-2) bc < math.txt > results.txt
-3) bc < math.txt > results.txt 2> /dev/null
-4) cat math.txt | bc    this is less efficient because it is running two separate commands instead of one and just redirecting the outputs
+Starting Nmap 5.51 ( http://nmap.org ) at 2017-02-03 17:42 EST
+Nmap scan report for xavier.h4x0r.space (129.74.160.130)
+Host is up (0.00047s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+9097/tcp open  unknown
+9111/tcp open  DragonIDSConsole
+9876/tcp open  sd
 
-ACTIVITY FOUR
-===============
+Nmap done: 1 IP address (1 host up) scanned in 0.07 seconds
 
-1) grep /sbin/nologin /etc/passwd | wc -l
-2) who -u | cut -d ' ' -f 1 | sort | uniq | wc -l
-3) du -a /etc 2> /dev/null | grep etc/ | sort -nr | head -n 5
-4) ps -e | grep bash | wc -l
+clearly there are 3 ports in the 9000 range
 
-ACTIVITY FIVE
-===============
+2) second step: try to access HTTP servers, I tried each port until finding something about lockboxes and this is what happened:
+    command
+      curl xavier.h4x0r.space:9876
+    output
 
-1
-====
-a) I tried to use Ctrl-C first, and when that did not work I used Ctrl-Z to suspend the process.  Once the process was suspended, I tried to use the kill command without any flags, but that did not work.
-b) Once I looked back at the textbook I saw the -KILL flag for the kill command and used that and it ended the process.
 
-2
-====
-a) pgrep -u tlynch2 TROLL | xargs kill -KILL
-b) killall -KILL TROLL 2> /dev/null
+ ________________________________________ 
+/ Halt! Who goes there?                  \
+|                                        |
+| If you seek the ORACLE, you must come  |
+| back and _request_ the DOORMAN at      |
+| /{NETID}/{PASSCODE}!                   |
+|                                        |
+| To retrieve your PASSCODE you must     |
+| first _find_ your LOCKBOX which is     |
+| located somewhere in                   |
+| ~pbui/pub/oracle/lockboxes.            |
+|                                        |
+| Once the LOCKBOX has been located, you |
+| must use your hacking skills to        |
+| _bruteforce_ the LOCKBOX program until |
+| it reveals the passcode!               |
+|                                        |
+\ Good luck!                             /
+ ---------------------------------------- 
+        \  ^___^
+         \ (ooo)\_______
+           (___)\       )\/\
+                ||----w |
+                ||     ||
 
-3
-====
-kill -HUP $(pgrep -u tlynch2 TROLL)
-  "You used to call me on my cell phone"
+3) to find my lockbox I changed to the lockboxes directory and used :
 
-kill -7 $(pgrep -u tlynch2 TROLL)
-  "The Vengabus is coming / And everybody's jumping"
+    find | grep | tlynch2 | grep lockbox
 
-kill -10 $(pgrep -u tlynch2 TROLL)
-  starts cmatrix
+    output:
+      
+./af0abfc6/2b783d9a/3e1c87c6/68c16c6a/tlynch2.lockbox
 
+4)
+    to try to get the password, I created a script that runs the lockbox command with each readable word, found by the strings command
+
+    script:
+      #!/bin/sh
+      
+      for i in $(strings tlynch2.lockbox)
+      do
+        tlynch2.lockbox $i
+      done
+
+    output:
+      
+      65aeed1014414e523716e9a4c77ce7fe
+
+so the output is the password
+
+5) I now am going to try to request the oracle
+    
+    command:
+        curl -vv xavier.h4x0r.space:9876/tlynch/{passcode}
+    output:
+        message telling me to slack and type in a message
+
+6) once I typed the message on slack, I got a message to send to the oracle
+
+    command
+        nc xavier.h4x0r.space 9111
+    output
+        asked for my name and I said tlynch2 then put the password from slack and I accessed the oracle
+
+
+    
