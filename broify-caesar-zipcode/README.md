@@ -1,5 +1,13 @@
 Homework 03
 ===========
+caesar.sh
+    Takes text input and applies a caesar cypher to the text
+
+broify.sh
+    Takes a file as input and removes lines based on a delimiter
+
+zipcode.sh
+    returns zipcodes of a specified location using http://www.zipcodestogo.com/
 
 ACTIVITY ONE
 ==============
