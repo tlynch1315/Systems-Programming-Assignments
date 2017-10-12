@@ -1,6 +1,12 @@
 Homework 02
 ===========
 
+fortune.sh is a shell script that uses "cowsay" to dispay a message after asking the user for input
+
+extract.sh is a shell script that automatically unzips folders
+
+
+
 ACTIVITY ONE
 ==============
 1) In extract.sh, I tested to see if there was a parameter after the command using [ -z "$1" ] and if this is true then a usage message is displayed and the script exits
