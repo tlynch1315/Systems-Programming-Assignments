@@ -1,6 +1,8 @@
 Homework 06
 ===========
 
+The goal of this homework assignment was to practice using arrays, pointers, and strings in C99. The first activity involves building a string utilities library, while the second activity required me to use this library to build a translate program similar to tr.
+
 ACTIVITY ONE
 ==============
 1) String_reverse_words works by reversing the entire string using string_reverse, then it uses two pointers and iterates the second while it is not equal to null and then while it is not a space, then sets begin = end, then moves the end pointer until it hits a null charachter or a space and then calls string_reverse_range(begin, end-1) to reverse that part of the string, which is just the current word, then it continues the iteration and goes to the next word until the end of the string.
