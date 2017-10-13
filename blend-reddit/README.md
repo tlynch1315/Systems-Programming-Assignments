@@ -1,5 +1,12 @@
 Homework 04
 ===========
+blend.py
+    python script that creates a gif blending two Notre Dame staff members together based on the input of the user
+
+reddit.py
+    python script that scrapes reddit rubreddits and returns articles based on a specifications given by the user
+
+
 ACTIVITY ONE 
 ===============
 1) I parsed command line arguments using .pop() along with conditional statements
