@@ -1,5 +1,8 @@
 Homework 07
 ===========
+
+The goal of this homework assignment was to practice using dynamic memory in C. The first activity involved building a singly-linked list library, while the second activity required me to use this library to build and benchmark a lsort utility similar to sort.
+
 ACTIVITY ONE
 ==============
 1) in node_create I allocated memory for the size of a node, which includes enough memory for a string, int, and pointer to next node, then in the node_delete, I deallocated all of that memory, by doing free(n->string) and free(n).  I dealt with the recursive flag by using a while loop it iterates over the next nodes if the recursive flag was true.
