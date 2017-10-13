@@ -1,5 +1,8 @@
 Homework 08
 ===========
+
+The goal of this homework assignment was to practice manipulating and building data structures in C. The first activity involved implementing a map library, while the second activity required me to use this library to build and benchmark a freq utility similar to uniq.
+
 ACTIVITY ONE
 ==============
 1)  in entry_create() I allocated enough memory for one Entry, which contains a key, value, next, and type.  In entry_delete() I checked if the type of the entry was a string, and if it was, I freed the value.string, then freed the key and then the entry.  If recursive was true, I used a while loop with a helper pointer and went until the current entry was NULL and did the same thing as if it were not recursive.
