@@ -1,5 +1,8 @@
 Homework 05
 ===========
+
+The goal of this homework assignment is to practice using Python to process data using functional programming techniques and MapReduce. In this assignment, I wrote a script that brute-force attacks a large collection of passwords using multiple processes and a pair of scripts that implements an inverted index.
+
 ACTIVITY ONE
 ==============
 1)
